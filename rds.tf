@@ -16,7 +16,7 @@ resource "aws_db_instance" "medici_rds_instance" {
   instance_class         = "db.t3.micro"
   identifier             = "medici-health-db"
   db_name                = "medicidb"
-  username               = "medici_admin"
+  username               = aws_ssm_parameter.medici_database_username.value
   password               = aws_ssm_parameter.medici_database_password.value
   db_subnet_group_name   = aws_db_subnet_group.rds_subnet_group.name
   vpc_security_group_ids = [aws_security_group.rds_security_group.id]

@@ -41,3 +41,7 @@ variable "private_subnet_b_cidr" {
 variable "database_master_password" {
   default = "password"
 }
+
+variable "database_master_username" {
+  default = "medici_admin"
+}
