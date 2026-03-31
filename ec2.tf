@@ -4,7 +4,7 @@ resource "aws_instance" "medici_webserver" {
   iam_instance_profile        = aws_iam_instance_profile.web_server_instance_profile.name
   subnet_id                   = aws_subnet.public_subnet_a.id
   vpc_security_group_ids      = [aws_security_group.medici_web_server_sg.id]
-  user_data_replace_on_change = true
+  #user_data_replace_on_change = true
   key_name                    = aws_key_pair.deployer_keypair.key_name
   user_data                   = <<-EOF
             #!/bin/bash
@@ -18,7 +18,6 @@ resource "aws_instance" "medici_webserver" {
             sudo systemctl enable docker
             sudo usermod -a -G docker ec2-user
             sudo chmod 666 /var/run/docker.sock
-
             EOF
   tags = {
     Name = "Medici_WebServer_${var.environment}"
