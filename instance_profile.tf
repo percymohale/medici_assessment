@@ -17,7 +17,7 @@ resource "aws_iam_role" "medici_webserver_role" {
 
 resource "aws_iam_role_policy_attachment" "medici_webserver_ecr_read" {
   role       = aws_iam_role.medici_webserver_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
 }
 
 
@@ -30,7 +30,7 @@ resource "aws_iam_policy" "medici_rds_describe" {
       {
         Effect = "Allow"
         Action = [
-          "rds:DescribeDBInstances"
+          "rds:"
         ]
         Resource = "*"
       }
@@ -43,10 +43,6 @@ resource "aws_iam_role_policy_attachment" "medici_rds_attach" {
   policy_arn = aws_iam_policy.medici_rds_describe.arn
 }
 
-resource "aws_iam_instance_profile" "ec2_profile" {
-  name = "ec2-ecr-rds-profile"
-  role = aws_iam_role.ec2_role.name
-}
 
 resource "aws_iam_instance_profile" "medici_webserver_ec2_profile" {
   name = "medici_webserver_ec2_profile"
